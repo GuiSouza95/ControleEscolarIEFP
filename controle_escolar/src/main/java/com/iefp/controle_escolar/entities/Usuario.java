@@ -1,0 +1,50 @@
+package com.iefp.controle_escolar.entities;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Table(name = "usuario")
+public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nome;
+
+    @Column(name = "username", nullable = false, unique = true)
+    private String userName;
+
+    @Column(nullable = false)
+    private String password;
+
+    private boolean accountNonLocked = true;
+
+    private int failedAttempts = 0;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> role = new HashSet<>();
+
+    private String status;
+
+    private Integer tentativas;
+
+    private LocalDateTime dataCriacao;
+
+    private LocalDateTime dataAlteracao;
+
+}
+
