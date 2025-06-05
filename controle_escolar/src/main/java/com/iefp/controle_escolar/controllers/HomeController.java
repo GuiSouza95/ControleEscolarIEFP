@@ -1,4 +1,4 @@
-package com.controle_escolar.controle_escolar.controller;
+package com.iefp.controle_escolar.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
