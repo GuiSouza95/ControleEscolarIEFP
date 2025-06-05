@@ -1,5 +1,7 @@
 package com.iefp.controle_escolar.entities;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,13 +35,13 @@ public class Nota {
     private Disciplina disciplina;
 
     @Column(precision = 2, scale = 2, nullable = false)
-    private Double nota1;
+    private BigDecimal nota1;
 
     @Column(precision = 2, scale = 2, nullable = false)
-    private Double nota2;
+    private BigDecimal nota2;
 
     @Column(precision = 2, scale = 2, nullable = false)
-    private Double media;
+    private BigDecimal media;
 
     @Column(length = 20, nullable = false)
     private String situacao;

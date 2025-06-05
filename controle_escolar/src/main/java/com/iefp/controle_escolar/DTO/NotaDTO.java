@@ -1,5 +1,7 @@
 package com.iefp.controle_escolar.DTO;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +15,8 @@ public class NotaDTO {
     private Long id;
     private Long alunoId;
     private Long disciplinaId;
-    private Double nota1;
-    private Double nota2;
-    private Double media;
+    private BigDecimal nota1;
+    private BigDecimal nota2;
+    private BigDecimal media;
     private String situacao;
 }

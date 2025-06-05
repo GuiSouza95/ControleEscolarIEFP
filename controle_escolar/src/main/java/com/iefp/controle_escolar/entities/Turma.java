@@ -43,7 +43,7 @@ public class Turma {
         joinColumns = @JoinColumn(name = "turma_id"),
         inverseJoinColumns = @JoinColumn(name = "disciplina_id")
     )
-    private Set<Disciplina> Disciplinas;
+    private Set<Disciplina> disciplinas;
 
     @CreationTimestamp
     private LocalDateTime createTime;

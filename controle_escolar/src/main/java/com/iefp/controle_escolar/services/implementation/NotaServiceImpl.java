@@ -1,5 +1,7 @@
 package com.iefp.controle_escolar.services.implementation;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,9 +36,12 @@ public class NotaServiceImpl implements NotaService{
         nota.setNota1(dto.getNota1());
         nota.setNota2(dto.getNota2());
 
-        double media = (dto.getNota1() + dto.getNota2()) / 2;
+        BigDecimal media = dto.getNota1()
+            .add(dto.getNota2())
+            .divide(BigDecimal.valueOf(2), 2, RoundingMode.HALF_UP);
         nota.setMedia(media);
-        nota.setSituacao(dto.getSituacao() != null ? dto.getSituacao() : (media >= 6.0 ? "Aprovado" : "Reprovado"));
+
+        nota.setSituacao(dto.getSituacao() != null ? dto.getSituacao() : (media.doubleValue() >= 6.0 ? "Aprovado" : "Reprovado"));
 
         nota = notaRepository.save(nota);
 
