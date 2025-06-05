@@ -13,5 +13,11 @@ public class HomeController {
         
         return "index";
     }
+
+    @GetMapping("/dashboard_professor")
+    public String dashboard_professor () {
+        
+        return "pages/dashboard_professor";
+    }
     
 }
