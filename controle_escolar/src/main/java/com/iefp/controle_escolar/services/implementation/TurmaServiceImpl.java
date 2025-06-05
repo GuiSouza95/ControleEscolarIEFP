@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.iefp.controle_escolar.DTO.TurmaDTO;
+import com.iefp.controle_escolar.dtos.TurmaDTO;
 import com.iefp.controle_escolar.entities.Turma;
 import com.iefp.controle_escolar.repositories.TurmaRepository;
 import com.iefp.controle_escolar.services.TurmaService;

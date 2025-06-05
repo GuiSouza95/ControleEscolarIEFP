@@ -1,6 +1,6 @@
-package com.iefp.controle_escolar.DTO;
+package com.iefp.controle_escolar.dtos;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TurmaDTO {
+public class ProfessorDTO {
     private Long id;
     private String nome;
-    private String periodo;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
+    private Long userId;
+    private List<Long> turmaIds;
+    private List<Long> disciplinaIds;
 }

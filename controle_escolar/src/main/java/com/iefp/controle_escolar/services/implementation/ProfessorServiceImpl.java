@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.iefp.controle_escolar.DTO.ProfessorDTO;
+import com.iefp.controle_escolar.dtos.ProfessorDTO;
 import com.iefp.controle_escolar.entities.Disciplina;
 import com.iefp.controle_escolar.entities.Professor;
 import com.iefp.controle_escolar.entities.Turma;

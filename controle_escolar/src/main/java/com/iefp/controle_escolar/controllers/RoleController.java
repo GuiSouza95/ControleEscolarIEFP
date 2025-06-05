@@ -1,10 +1,8 @@
 package com.iefp.controle_escolar.controllers;
 
 import com.iefp.controle_escolar.entities.Role;
-import com.iefp.controle_escolar.services.RoleService;
-import lombok.NoArgsConstructor;
+import com.iefp.controle_escolar.services.implementation.RoleServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class RoleController {
 
-    private final RoleService roleService;
+    private final RoleServiceImpl roleService;
 
     @GetMapping
     public String listar(Model model) {

@@ -2,7 +2,7 @@ package com.iefp.controle_escolar.services;
 
 import java.util.List;
 
-import com.iefp.controle_escolar.DTO.DisciplinaDTO;
+import com.iefp.controle_escolar.dtos.DisciplinaDTO;
 import com.iefp.controle_escolar.entities.Disciplina;
 
 public interface DisciplinaService {

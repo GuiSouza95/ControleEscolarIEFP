@@ -1,4 +1,4 @@
-package com.iefp.controle_escolar.DTO;
+package com.iefp.controle_escolar.dtos;
 
 import java.math.BigDecimal;
 

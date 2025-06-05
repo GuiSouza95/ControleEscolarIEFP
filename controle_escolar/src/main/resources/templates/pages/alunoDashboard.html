@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<head>
+    <title>Área do Aluno</title>
+</head>
+
+<body>
+<main layout:fragment="content" class="container-fluid px-4 mt-4">
+
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <h2 th:text="'Olá, ' + ${aluno.nome} + '!'">Olá, Aluno!</h2>
+            <p class="text-muted">Aqui estão suas informações acadêmicas.</p>
+        </div>
+        <div class="col-lg-4">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar conteúdo..." aria-label="Search">
+                <button class="btn btn-outline-primary" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+
+    <section class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Turma</h5>
+                    <p class="card-text">
+                        <strong>Nome:</strong> <span th:text="${aluno.turma.nome}">Turma A</span><br>
+                        <strong>Turno:</strong> <span th:text="${aluno.turma.turno}">Manhã</span><br>
+                        <strong>Ano Letivo:</strong> <span th:text="${aluno.turma.anoLetivo}">2025</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Disciplinas e Notas</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                            <tr>
+                                <th>Disciplina</th>
+                                <th>Professor</th>
+                                <th>Nota 1</th>
+                                <th>Nota 2</th>
+                                <th>Nota Final</th>
+                                <th>Situação</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="nota : ${aluno.notas}">
+                                <td th:text="${nota.disciplina.nome}">Matemática</td>
+                                <td th:text="${nota.disciplina.professor.nome}">João Silva</td>
+                                <td th:text="${nota.nota1}">7.5</td>
+                                <td th:text="${nota.nota2}">8.0</td>
+                                <td th:text="${nota.notaFinal}">7.8</td>
+                                <td>
+                                        <span th:text="${nota.aprovado ? 'Aprovado' : 'Reprovado'}"
+                                              th:classappend="${nota.aprovado} ? 'text-success' : 'text-danger'">Aprovado</span>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(aluno.notas)}">
+                                <td colspan="6" class="text-center text-muted">Nenhuma nota registrada.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer th:fragment="footer" class="text-center mt-5 fixed-bottom">
+    <p>© 2025 Controle Escolar IEFP - Todos os direitos reservados</p>
+</footer>
+</body>
+</html>

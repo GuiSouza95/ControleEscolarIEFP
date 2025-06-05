@@ -1,10 +1,9 @@
 package com.iefp.controle_escolar.controllers;
 
 import com.iefp.controle_escolar.entities.Usuario;
-import com.iefp.controle_escolar.services.RoleService;
-import com.iefp.controle_escolar.services.UsuarioService;
+import com.iefp.controle_escolar.services.implementation.RoleServiceImpl;
+import com.iefp.controle_escolar.services.implementation.UsuarioServiceimpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +15,9 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    private final UsuarioServiceimpl usuarioService;
 
-    private final RoleService roleService;
+    private final RoleServiceImpl roleService;
 
     @GetMapping
     public String listar(Model model) {

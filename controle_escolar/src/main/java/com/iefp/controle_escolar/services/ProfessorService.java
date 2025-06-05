@@ -2,7 +2,7 @@ package com.iefp.controle_escolar.services;
 
 import java.util.List;
 
-import com.iefp.controle_escolar.DTO.ProfessorDTO;
+import com.iefp.controle_escolar.dtos.ProfessorDTO;
 
 public interface ProfessorService {
     ProfessorDTO createProfessor(ProfessorDTO professorDTO);

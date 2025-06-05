@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.iefp.controle_escolar.DTO.DisciplinaDTO;
+import com.iefp.controle_escolar.dtos.DisciplinaDTO;
 import com.iefp.controle_escolar.entities.Disciplina;
 import com.iefp.controle_escolar.entities.Turma;
 import com.iefp.controle_escolar.repositories.DisciplinaRepository;

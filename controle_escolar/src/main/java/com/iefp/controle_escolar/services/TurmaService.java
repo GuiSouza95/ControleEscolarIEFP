@@ -2,7 +2,7 @@ package com.iefp.controle_escolar.services;
 
 import java.util.List;
 
-import com.iefp.controle_escolar.DTO.TurmaDTO;
+import com.iefp.controle_escolar.dtos.TurmaDTO;
 import com.iefp.controle_escolar.entities.Turma;
 
 public interface TurmaService {
