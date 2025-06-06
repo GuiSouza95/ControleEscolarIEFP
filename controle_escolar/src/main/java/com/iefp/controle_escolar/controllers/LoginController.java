@@ -26,10 +26,17 @@ public class LoginController {
 
         if (response.isAuthenticated()) {
             model.addAttribute("aluno", response.getAluno());
+            model.addAttribute("menuItens", response.getMenuItens());
 
-            return response.getPerfil().equalsIgnoreCase("Professor")
-                    ? "redirect:/dashboard_professor"
-                    : "redirect:/dashboard_aluno";
+            String perfil = response.getPerfil();
+
+            if ("Administrador".equalsIgnoreCase(perfil)) {
+                return "redirect:/dashboard_administrador";
+            } else if ("Professor".equalsIgnoreCase(perfil)) {
+                return "redirect:/dashboard_professor";
+            } else {
+                return "pages/dashboard_aluno";
+            }
         } else {
             model.addAttribute("error", response.getMessage());
             model.addAttribute("loginRequest", loginRequest);

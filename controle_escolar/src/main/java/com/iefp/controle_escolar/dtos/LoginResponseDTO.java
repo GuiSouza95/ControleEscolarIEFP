@@ -3,6 +3,8 @@ package com.iefp.controle_escolar.dtos;
 import com.iefp.controle_escolar.entities.Aluno;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,4 +16,5 @@ public class LoginResponseDTO {
     private Long userId;
     private String perfil;
     private Aluno aluno;
+    private List<MenuItemDTO> menuItens;
 }

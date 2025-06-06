@@ -29,7 +29,7 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
 
-    private boolean accountNonLocked = true;
+    private boolean accountNonLocked;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
