@@ -42,10 +42,10 @@ public class LoginServiceImpl implements LoginService {
                         .message("Conta bloqueada. Contacte o administrador.")
                         .build();
             }
-            
-            usuarioFound.setFailedAttempts(usuarioFound.getFailedAttempts() + 1);
 
-            if (usuarioFound.getFailedAttempts()>=5){
+            usuarioFound.setTentativas(usuarioFound.getTentativas() + 1);
+
+            if (usuarioFound.getTentativas()>=5){
                 usuarioFound.setAccountNonLocked(true);
             }
 
@@ -56,8 +56,6 @@ public class LoginServiceImpl implements LoginService {
                     .message("Usuário ou senha inválida.")
                     .build();
         }
-
-
 
 
         Aluno alunoFound = alunoRepository.findByUsuarioId(usuarioFound.getId()).orElse(null);

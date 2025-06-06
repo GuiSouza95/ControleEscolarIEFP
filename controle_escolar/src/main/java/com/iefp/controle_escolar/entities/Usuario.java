@@ -31,8 +31,6 @@ public class Usuario {
 
     private boolean accountNonLocked = true;
 
-    private int failedAttempts = 0;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
@@ -42,7 +40,7 @@ public class Usuario {
 
     private String status;
 
-    private Integer tentativas;
+    private Integer tentativas = 0;
 
     private LocalDateTime dataCriacao;
 
