@@ -5,6 +5,7 @@ import com.iefp.controle_escolar.entities.Usuario;
 import com.iefp.controle_escolar.repositories.AlunoRepository;
 import com.iefp.controle_escolar.services.LoginService;
 import com.iefp.controle_escolar.utils.CriptografiaUtil;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import com.iefp.controle_escolar.dtos.LoginRequestDTO;
 import com.iefp.controle_escolar.dtos.LoginResponseDTO;
@@ -30,13 +31,34 @@ public class LoginServiceImpl implements LoginService {
                     .authenticated(false)
                     .message("Usuário ou senha inválida.")
                     .build();
+        }
 
-        } else if (!CriptografiaUtil.verificarSenha(loginRequest.getPassword(), usuarioFound.getPassword())) {
+
+        if (!CriptografiaUtil.verificarSenha(loginRequest.getPassword(), usuarioFound.getPassword())) {
+
+            if (usuarioFound.isAccountNonLocked()) {
+                return LoginResponseDTO.builder()
+                        .authenticated(false)
+                        .message("Conta bloqueada. Contacte o administrador.")
+                        .build();
+            }
+            
+            usuarioFound.setFailedAttempts(usuarioFound.getFailedAttempts() + 1);
+
+            if (usuarioFound.getFailedAttempts()>=5){
+                usuarioFound.setAccountNonLocked(true);
+            }
+
+            usuarioRepository.save(usuarioFound);
+
             return LoginResponseDTO.builder()
                     .authenticated(false)
                     .message("Usuário ou senha inválida.")
                     .build();
         }
+
+
+
 
         Aluno alunoFound = alunoRepository.findByUsuarioId(usuarioFound.getId()).orElse(null);
 
@@ -46,5 +68,6 @@ public class LoginServiceImpl implements LoginService {
                 .perfil(usuarioFound.getRole().get(0).getNome())
                 .aluno(alunoFound)
                 .build();
-    }
+        }
+
 }
