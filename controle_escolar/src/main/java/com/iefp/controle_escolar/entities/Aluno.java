@@ -25,9 +25,9 @@ public class Aluno {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-  //  @ManyToOne
- //   @JoinColumn(name = "turma_id")
-//    private Turma turma;
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
+    private Turma turma;
 
     private String nome;
     private String apelido;

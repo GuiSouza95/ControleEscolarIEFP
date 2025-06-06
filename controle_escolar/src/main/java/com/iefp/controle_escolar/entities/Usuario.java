@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,7 +24,7 @@ public class Usuario {
     private String nome;
 
     @Column(name = "username", nullable = false, unique = true)
-    private String userName;
+    private String usuario;
 
     @Column(nullable = false)
     private String password;
@@ -36,7 +38,7 @@ public class Usuario {
             name = "user_role",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> role = new HashSet<>();
+    private List<Role> role = new ArrayList<>();
 
     private String status;
 

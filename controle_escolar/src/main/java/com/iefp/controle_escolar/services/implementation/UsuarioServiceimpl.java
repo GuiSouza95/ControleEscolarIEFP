@@ -24,8 +24,8 @@ public class UsuarioServiceimpl implements UsuarioService {
     }
 
     @Override
-    public Optional<Usuario> buscarPorUsername(String username) {
-        return repository.findByUserName(username);
+    public Optional<Usuario> buscarPorUsuario(String usuario) {
+        return repository.findByUsuario(usuario);
     }
 
     @Override
@@ -39,15 +39,15 @@ public class UsuarioServiceimpl implements UsuarioService {
     }
 
     @Override
-    public void registrarTentativaFalha(String username) {
-        Optional<Usuario> opt = repository.findByUserName(username);
-        opt.ifPresent(usuario -> {
-            int tentativas = usuario.getTentativas() + 1;
-            usuario.setTentativas(tentativas);
+    public void registrarTentativaFalha(String usuario) {
+        Optional<Usuario> opt = repository.findByUsuario(usuario);
+        opt.ifPresent(u -> {
+            int tentativas = u.getTentativas() + 1;
+            u.setTentativas(tentativas);
             if (tentativas >= 5) {
-                usuario.setStatus("BLOQUEADO");
+                u.setStatus("BLOQUEADO");
             }
-            repository.save(usuario);
+            repository.save(opt.get());
         });
     }
 

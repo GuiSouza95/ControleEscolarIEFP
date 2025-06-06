@@ -8,10 +8,10 @@ import java.util.Optional;
 public interface UsuarioService {
 
     List<Usuario> listarTodos ();
-    Optional<Usuario> buscarPorUsername(String username);
+    Optional<Usuario> buscarPorUsuario(String usuario);
     Optional<Usuario> buscarPorId(Long id);
     Usuario salvar(Usuario usuario);
-    void registrarTentativaFalha(String username);
+    void registrarTentativaFalha(String usuario);
     void resetarTentativas(Usuario usuario);
     void excluirUsuario (Long id);
 }

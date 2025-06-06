@@ -1,5 +1,6 @@
 package com.iefp.controle_escolar.dtos;
 
+import com.iefp.controle_escolar.entities.Aluno;
 import lombok.*;
 
 @Data
@@ -9,7 +10,8 @@ import lombok.*;
 public class LoginResponseDTO {
 
     private String message;
-    private Boolean authenticated;
-    private Long usuarioId;
-    private String perfil; // "Aluno" ou "Professor"
+    private boolean authenticated;
+    private Long userId;
+    private String perfil;
+    private Aluno aluno;
 }
