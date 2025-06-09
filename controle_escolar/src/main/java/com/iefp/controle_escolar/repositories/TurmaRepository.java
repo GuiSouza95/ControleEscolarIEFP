@@ -2,8 +2,11 @@ package com.iefp.controle_escolar.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.iefp.controle_escolar.entities.Turma;
+import com.iefp.controle_escolar.entities.TurmaEntity;
 
-public interface TurmaRepository extends JpaRepository<Turma, Long>{
-    Turma findByNome(String nome);
+import java.util.List;
+
+public interface TurmaRepository extends JpaRepository<TurmaEntity, Long>{
+
+    List<TurmaEntity> findByNomeContainingIgnoreCase(String nome);
 }

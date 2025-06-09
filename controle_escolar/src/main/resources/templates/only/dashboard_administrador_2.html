@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: head">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard Administrador</title>
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <header th:replace="layout :: header"></header>
+                </div>
+
+                <div class="col-10">
+                    <main class="container-fluid px-4 mt-4">
+                        <div class="row mb-4">
+                            <div class="col-lg-8">
+                                <h2>Bem-vindo(a)!</h2>
+                                <p th:text="'Olá, ' + ${nickname} + '! Seja bem-vindo ao sistema.'">Texto padrão</p>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="layout :: footer"></footer>
+    </body>
+</html>

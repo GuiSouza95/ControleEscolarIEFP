@@ -1,6 +1,6 @@
 package com.iefp.controle_escolar.controllers;
 
-import com.iefp.controle_escolar.entities.Role;
+import com.iefp.controle_escolar.entities.RoleEntity;
 import com.iefp.controle_escolar.services.implementation.RoleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,19 +22,19 @@ public class RoleController {
 
     @GetMapping("/novo")
     public String novo(Model model) {
-        model.addAttribute("role", new Role());
+        model.addAttribute("role", new RoleEntity());
         return "role/formulario";
     }
 
     @PostMapping
-    public String salvar(@ModelAttribute Role role) {
+    public String salvar(@ModelAttribute RoleEntity role) {
         roleService.salvar(role);
         return "redirect:/roles";
     }
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, Model model) {
-        model.addAttribute("role", roleService.buscarPorId(id).orElseThrow());
+        model.addAttribute("role", roleService.buscarPorId(id));
         return "role/formulario";
     }
 

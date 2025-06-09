@@ -22,17 +22,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "nota")
 public class Nota {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "aluno_id", nullable = false)
-    private Aluno aluno;
-
-    @ManyToOne
     @JoinColumn(name = "disciplina_id", nullable = false)
-    private Disciplina disciplina;
+    private DisciplinaEntity disciplina;
 
     @Column(precision = 2, scale = 2, nullable = false)
     private BigDecimal nota1;

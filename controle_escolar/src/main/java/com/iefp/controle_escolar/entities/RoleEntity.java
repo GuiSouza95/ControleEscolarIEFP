@@ -3,13 +3,15 @@ package com.iefp.controle_escolar.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Table (name = "role")
-public class Role {
+public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,4 +19,7 @@ public class Role {
 
     @Column(nullable = false, unique = true)
     private String nome;
+
+    @ManyToMany(mappedBy = "role")
+    private List<RoleMenuItem> menuItems;
 }

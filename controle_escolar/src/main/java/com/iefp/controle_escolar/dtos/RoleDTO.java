@@ -1,7 +1,5 @@
 package com.iefp.controle_escolar.dtos;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfessorDTO {
+public class RoleDTO {
     private Long id;
     private String nome;
-    private Long userId;
-    private List<Long> turmaIds;
-    private List<Long> disciplinaIds;
 }

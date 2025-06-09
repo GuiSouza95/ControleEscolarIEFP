@@ -1,14 +1,14 @@
 package com.iefp.controle_escolar.services;
 
-import com.iefp.controle_escolar.entities.Role;
+import com.iefp.controle_escolar.dtos.RoleDTO;
+import com.iefp.controle_escolar.entities.RoleEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface RoleService {
 
-    List<Role> listarTodos();
-    Optional<Role> buscarPorId(Long id);
-    Role salvar(Role role);
+    List<RoleDTO> listarTodos();
+    RoleDTO buscarPorId(Long id);
+    RoleEntity salvar(RoleEntity role);
     void excluir(Long id);
 }

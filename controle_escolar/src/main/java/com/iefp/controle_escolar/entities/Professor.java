@@ -1,42 +1,26 @@
 package com.iefp.controle_escolar.entities;
 
-import java.util.List;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
+@Getter
+@Setter
 @Table(name = "professor")
 public class Professor {
     
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 200, nullable = false)
     private String nome;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Usuario user;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private UserEntity usuario;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
         name = "professor_turma",
         joinColumns = @JoinColumn(name = "professor_id"),
@@ -50,5 +34,5 @@ public class Professor {
         joinColumns = @JoinColumn(name = "professor_id"),
         inverseJoinColumns = @JoinColumn(name = "disciplina_id")
     )
-    private List<Disciplina> disciplinas;
+    private List<Disciplina> disciplinas;*/
 }

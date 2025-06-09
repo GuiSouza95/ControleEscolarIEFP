@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<body>
+
+<div th:fragment="mainContent">
+
+    <!-- 🔍 Pesquisa -->
+    <form method="get" th:action="@{/turmas}" class="mb-4 d-flex">
+        <input type="text" name="nome" th:value="${nome}" class="form-control me-2" placeholder="Pesquisar por nome da turma">
+        <button class="btn btn-outline-primary">Buscar</button>
+    </form>
+
+    <!-- 📝 Formulário -->
+    <form th:action="@{/turmas/salvar}" th:object="${turma}" method="post" class="mb-5">
+        <input type="hidden" th:field="*{id}">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Nome da Turma</label>
+                <input type="text" class="form-control" th:field="*{nome}" required placeholder="Ex: Turma A">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Período</label>
+                <select class="form-select" th:field="*{periodo}" required>
+                    <option value="">Selecione</option>
+                    <option value="Manhã">Manhã</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noite">Noite</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <a th:href="@{/turmas}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+
+    <!-- 📋 Tabela -->
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Período</th>
+            <th style="width: 140px;">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="t : ${turmas}">
+            <td th:text="${t.nome}">Nome</td>
+            <td th:text="${t.periodo}">Período</td>
+            <td>
+                <button type="button"
+                        class="btn btn-sm btn-warning"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editarTurmaModal"
+                        th:attr="data-id=${t.id}, data-nome=${t.nome}, data-periodo=${t.periodo}">
+                    Editar
+                </button>
+                <a th:href="@{'/turmas/excluir/' + ${t.id}}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Deseja excluir esta turma?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal de Edição -->
+<div th:fragment="modais">
+    <div class="modal fade" id="editarTurmaModal" tabindex="-1" aria-labelledby="editarTurmaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content" th:action="@{/turmas/salvar}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarTurmaModalLabel">Editar Turma</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="editTurmaId">
+                    <div class="mb-3">
+                        <label for="editTurmaNome" class="form-label">Nome</label>
+                        <input type="text" name="nome" id="editTurmaNome" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTurmaPeriodo" class="form-label">Período</label>
+                        <select name="periodo" id="editTurmaPeriodo" class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="Manhã">Manhã</option>
+                            <option value="Tarde">Tarde</option>
+                            <option value="Noite">Noite</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script do Modal -->
+    <script>
+        const modal = document.getElementById('editarTurmaModal');
+        modal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+
+            const id = button.getAttribute('data-id');
+            const nome = button.getAttribute('data-nome');
+            const periodo = button.getAttribute('data-periodo');
+
+            document.getElementById('editTurmaId').value = id;
+            document.getElementById('editTurmaNome').value = nome;
+            document.getElementById('editTurmaPeriodo').value = periodo;
+        });
+    </script>
+</div>
+
+</body>
+</html>

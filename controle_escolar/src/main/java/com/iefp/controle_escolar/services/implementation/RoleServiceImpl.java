@@ -1,32 +1,38 @@
 package com.iefp.controle_escolar.services.implementation;
 
-import com.iefp.controle_escolar.entities.Role;
+import com.iefp.controle_escolar.dtos.RoleDTO;
+import com.iefp.controle_escolar.entities.RoleEntity;
+import com.iefp.controle_escolar.mappers.RoleMapper;
 import com.iefp.controle_escolar.repositories.RoleRepository;
 import com.iefp.controle_escolar.services.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
+    private final RoleMapper roleMapper;
 
     @Override
-    public List<Role> listarTodos() {
-        return roleRepository.findAll();
+    public List<RoleDTO> listarTodos() {
+
+        List<RoleEntity> roleEntities = roleRepository.findAll();
+        return roleMapper.toDTOList(roleEntities);
     }
 
     @Override
-    public Optional<Role> buscarPorId(Long id) {
-        return roleRepository.findById(id);
+    public RoleDTO buscarPorId(Long id) {
+
+        RoleEntity roleEntity = roleRepository.findById(id).orElseThrow();
+        return roleMapper.toDTO(roleEntity);
     }
 
     @Override
-    public Role salvar(Role role) {
+    public RoleEntity salvar(RoleEntity role) {
         return roleRepository.save(role);
     }
 

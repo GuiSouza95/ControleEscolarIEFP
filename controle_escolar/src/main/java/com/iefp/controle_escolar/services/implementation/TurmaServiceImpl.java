@@ -1,79 +1,52 @@
 package com.iefp.controle_escolar.services.implementation;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.iefp.controle_escolar.mappers.TurmaMapper;
+import lombok.RequiredArgsConstructor;
 
 import com.iefp.controle_escolar.dtos.TurmaDTO;
-import com.iefp.controle_escolar.entities.Turma;
+import com.iefp.controle_escolar.entities.TurmaEntity;
 import com.iefp.controle_escolar.repositories.TurmaRepository;
 import com.iefp.controle_escolar.services.TurmaService;
+import org.springframework.stereotype.Service;
 
-public class TurmaServiceImpl implements TurmaService{
-    TurmaRepository turmaRepo;
+@Service
+@RequiredArgsConstructor
+public class TurmaServiceImpl implements TurmaService {
 
-    @Autowired
-    public TurmaServiceImpl(TurmaRepository turmaRepo){
-        this.turmaRepo = turmaRepo;
+    private final TurmaRepository repository;
+    private final TurmaMapper mapper;
+
+    @Override
+    public List<TurmaDTO> listarTodos() {
+
+        List<TurmaEntity> disciplinas = repository.findAll();
+        return mapper.toDTOList(disciplinas);
     }
 
     @Override
-    public List<TurmaDTO> findAllTurmas(){
-        List<Turma> turmas = turmaRepo.findAll();
-        
-        return turmas.stream().map(this::turmaToTurmaDto).collect(Collectors.toList());
-    }
+    public List<TurmaDTO> listarPorNome(String nome) {
 
-    private TurmaDTO turmaToTurmaDto(Turma turma){
-        TurmaDTO turmaDTO = TurmaDTO.builder()
-            .id(turma.getId())
-            .nome(turma.getNome())
-            .periodo(turma.getPeriodo())
-            .createTime(turma.getCreateTime())
-            .updateTime(turma.getUpdateTime())
-            .build();
-
-        return turmaDTO;
-    }
-
-
-    private Turma turmaDtoToTurma(TurmaDTO turmaDto){
-        Turma turma = Turma.builder()
-            .id(turmaDto.getId())
-            .nome(turmaDto.getNome())
-            .periodo(turmaDto.getPeriodo())
-            .createTime(turmaDto.getCreateTime())
-            .updateTime(turmaDto.getUpdateTime())
-            .build();
-
-        return turma;
+        List<TurmaEntity> turmas = repository.findByNomeContainingIgnoreCase(nome);
+        return mapper.toDTOList(turmas);
     }
 
     @Override
-    public Turma saveTurma(Turma turma){
-        if (turma.getNome().isEmpty()) {
-            return null;
-        }
+    public TurmaDTO buscarPorId(Long id) {
 
-        return turmaRepo.save(turma);
+        TurmaEntity turma = repository.findById(id).orElseThrow();
+        return mapper.toDTO(turma);
     }
 
     @Override
-    public TurmaDTO findTurmaById(Long id){
-        Turma turma = turmaRepo.findById(id).orElse(null);
+    public void salvar(TurmaDTO dto) {
 
-        if (turma == null) {
-            return null;            
-        }
-
-        return turmaToTurmaDto(turma);
+        TurmaEntity turma = mapper.toEntity(dto);
+        repository.save(turma);
     }
 
     @Override
-    public TurmaDTO updateTurma(TurmaDTO turmaDto){
-        Turma turma = turmaDtoToTurma(turmaDto);
-            
-        return turmaToTurmaDto(this.saveTurma(turma));
+    public void excluirById(Long id) {
+        repository.deleteById(id);
     }
 }

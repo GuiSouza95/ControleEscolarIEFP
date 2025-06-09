@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+    <body>
+        <div th:fragment="mainContent">
+            <h2>Dashboard</h2>
+            <p th:text="'Olá, ' + ${nickname} + '! Seja bem-vindo ao sistema.'">Mensagem padrão</p>
+        </div>
+
+        <div th:fragment="modais"></div>
+    </body>
+</html>

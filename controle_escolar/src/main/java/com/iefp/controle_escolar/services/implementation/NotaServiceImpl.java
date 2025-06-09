@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.iefp.controle_escolar.dtos.NotaDTO;
 import com.iefp.controle_escolar.entities.Nota;
-import com.iefp.controle_escolar.repositories.AlunoRepository;
 import com.iefp.controle_escolar.repositories.DisciplinaRepository;
 import com.iefp.controle_escolar.repositories.NotaRepository;
 import com.iefp.controle_escolar.services.NotaService;
@@ -21,16 +20,13 @@ public class NotaServiceImpl implements NotaService{
     private NotaRepository notaRepository;
 
     @Autowired
-    private AlunoRepository alunoRepository;
-
-    @Autowired
     private DisciplinaRepository disciplinaRepository;
 
     @Override
     public NotaDTO createNota(NotaDTO dto) {
         Nota nota = new Nota();
 
-        nota.setAluno(alunoRepository.findById(dto.getAlunoId()).orElseThrow());
+        //nota.setAluno(alunoRepository.findById(dto.getAlunoId()).orElseThrow());
         nota.setDisciplina(disciplinaRepository.findById(dto.getDisciplinaId()).orElseThrow());
 
         nota.setNota1(dto.getNota1());
@@ -58,7 +54,7 @@ public class NotaServiceImpl implements NotaService{
 
         NotaDTO dto = new NotaDTO();
         dto.setId(nota.getId());
-        dto.setAlunoId(nota.getAluno().getId());
+        //dto.setAlunoId(nota.getAluno().getId());
         dto.setDisciplinaId(nota.getDisciplina().getId());
         dto.setNota1(nota.getNota1());
         dto.setNota2(nota.getNota2());
@@ -73,7 +69,7 @@ public class NotaServiceImpl implements NotaService{
         return notaRepository.findAll().stream().map(nota -> {
             NotaDTO dto = new NotaDTO();
             dto.setId(nota.getId());
-            dto.setAlunoId(nota.getAluno().getId());
+            //dto.setAlunoId(nota.getAluno().getId());
             dto.setDisciplinaId(nota.getDisciplina().getId());
             dto.setNota1(nota.getNota1());
             dto.setNota2(nota.getNota2());
